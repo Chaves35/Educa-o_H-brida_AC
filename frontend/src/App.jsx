@@ -9,40 +9,26 @@ import './App.css';
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
 
+  // Função para lidar com a mudança de página
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   const renderPage = () => {
     if (currentPage === 'login') {
-      return <Login />;
+      return <Login onPageChange={handlePageChange} />;
     }
     if (currentPage === 'register') {
-      return <Register />;
+      return <Register onPageChange={handlePageChange} />;
     }
-    // Podemos adicionar mais páginas aqui no futuro
-    return <Login />; // Página padrão
+    // Página padrão
+    return <Login onPageChange={handlePageChange} />; 
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
       {/* Container principal para os componentes e botões de navegação */}
       {renderPage()}
-      
-      {/* Botões para alternar entre as páginas de Login e Register */}
-      <div className="mt-4 text-center">
-        {currentPage === 'login' ? (
-          <button
-            className="text-sm text-indigo-600 hover:text-indigo-500 font-medium"
-            onClick={() => setCurrentPage('register')}
-          >
-            Não tem uma conta? Registre-se aqui.
-          </button>
-        ) : (
-          <button
-            className="text-sm text-indigo-600 hover:text-indigo-500 font-medium"
-            onClick={() => setCurrentPage('login')}
-          >
-            Já tem uma conta? Entre aqui.
-          </button>
-        )}
-      </div>
     </div>
   );
 }
